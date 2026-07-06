@@ -2,6 +2,8 @@
 
 A social music app where friends share songs, build collaborative playlists, and track listening stats.
 
+> **Project 5 Submission:** See [`submission.md`](submission.md) for the codebase map, root cause analyses (all 5 bugs fixed), AI usage section, and git log screenshot. Work is on the `bugfix/mixtape` branch with 5 separate `fix:` commits.
+
 This is the starter repo for **Project 5: Mixtape Bug Hunt**. The app has five open issues in its tracker. Your job is to find, fix, and document at least three of them.
 
 ---

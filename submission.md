@@ -1,5 +1,9 @@
 # Mixtape Bug Hunt — Submission
 
+**Student:** Muhammad Ahmad  
+**Branch:** `bugfix/mixtape`  
+**Repo:** https://github.com/muhammadahmadr1zwan/ai201-project5-mixtape-starter
+
 ![Git commit history on bugfix/mixtape branch](git-log-screenshot.png)
 
 ## AI Usage
