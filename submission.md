@@ -45,7 +45,7 @@ Every route delegates immediately to a service function. Routes never touch the 
 5. If `song.shared_by != added_by`, calls `create_notification()` with type `song_added_to_playlist`
 6. `create_notification()` inserts a `Notification` row and commits
 
-The rating flow (`POST /songs/<id>/rate` → `rate_song()`) follows the same pattern but was missing step 5 — the notification call.
+A related flow — rating a song — follows the same route-to-service pattern: `POST /songs/<id>/rate` → `routes/songs.py` → `notification_service.rate_song()`, which persists a `Rating` and may also notify the song's original sharer.
 
 ---
 
@@ -113,7 +113,7 @@ The rating flow (`POST /songs/<id>/rate` → `rate_song()`) follows the same pat
 
 ## Regression Test Reference
 
-- **Issue #1:** `tests/test_streaks.py::test_streak_increments_on_sunday` (pre-existing)
-- **Issue #2:** `tests/test_feed.py` (added)
-- **Issue #3:** `tests/test_search.py::test_search_no_duplicates_multi_tag_song` (pre-existing)
-- **Issue #5:** `tests/test_playlists.py::test_playlist_returns_all_songs` (pre-existing)
+- **Issue #1:** `tests/test_streaks.py::test_streak_increments_on_sunday` — simulates Saturday then Sunday listening; asserts streak reaches 2. Would fail against buggy code because the `today.weekday() != 6` guard resets the streak to 1 on Sunday.
+- **Issue #2:** `tests/test_feed.py::test_listening_now_excludes_yesterday` (added) — seeds a friend who only listened yesterday and one who listened today; asserts only today's friend appears. Would fail against buggy code because the rolling 24-hour window still includes yesterday evening's events.
+- **Issue #3:** `tests/test_search.py::test_search_no_duplicates_multi_tag_song` — searches for a 3-tag song and asserts exactly one result. Would fail if the outer join multiplies rows per tag.
+- **Issue #5:** `tests/test_playlists.py::test_playlist_returns_all_songs` — asserts a 5-song playlist returns 5 songs. Would fail against buggy code because `songs[:-1]` drops the last track.
