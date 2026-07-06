@@ -1,5 +1,7 @@
 # Mixtape Bug Hunt — Submission
 
+![Git commit history on bugfix/mixtape branch](git-log-screenshot.png)
+
 ## AI Usage
 
 I used Cursor's AI assistant throughout this project as a debugging collaborator, not as a substitute for reading the code.
